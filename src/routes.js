@@ -2,8 +2,12 @@ const { Router } = require('express');
 
 const OngController = require('./app/controllers/OngController');
 const IncidentController = require('./app/controllers/IncidentController');
+const SessionController = require('./app/controllers/SessionController');
 
 const routes = new Router();
+
+// SESSION
+routes.post('/sessions', SessionController.store);
 
 //  ONGS
 routes.get('/ongs', OngController.index);
