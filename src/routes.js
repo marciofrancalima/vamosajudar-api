@@ -1,7 +1,11 @@
 const { Router } = require('express');
 
+const OngController = require('./app/controllers/OngController');
+
 const routes = new Router();
 
-routes.get('/', (req, res) => res.json({ message: 'Hello world' }));
+//  ONGS
+routes.get('/ongs', OngController.index);
+routes.post('/ongs', OngController.store);
 
 module.exports = routes;
