@@ -8,7 +8,7 @@ https://github.com/marciofrancalima/vamosajudar-web
 
 API desenvolvida com Node.js que faz parte de uma aplicação para aproximar colaboradores e ONGs que precisam de ajuda.
 
-## Technologies
+## Tecnologias
 
 Tecnologias usadas para este desenvolvimento:
 
@@ -27,7 +27,7 @@ ESLint, Prettier e EditorConfig também foram usados para manter o padrão na es
 
 ## Como rodar a aplicação
 
-Siga as instruções abaixo
+Siga as instruções abaixo:
 
 ```bash
 # Clonar o repositório
