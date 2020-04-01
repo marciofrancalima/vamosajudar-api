@@ -8,7 +8,9 @@ class SessionController {
 
     // Checks if the ong exists
     if (!ong) {
-      return res.status(400).json({ error: 'No ONG found with this ID' });
+      return res
+        .status(401)
+        .json({ error: 'ONG not registered or invalid ID.' });
     }
 
     return res.status(201).json(ong);
