@@ -134,7 +134,6 @@ describe('INCIDENT', () => {
     expect(response2.status).toBe(400);
   });
 
-  // TODO: Criar os testes de listar e excluir
   it('should be able to list all (3 cases) incidents', async () => {
     const ongId = await createOng();
     const otherOngId = await createOng();
@@ -154,6 +153,32 @@ describe('INCIDENT', () => {
 
     expect(response.status).toBe(200);
     expect(count).toBe(3);
+  });
+
+  it('should be able to list incidents with page number', async () => {
+    const ongId = await createOng();
+
+    await createIncident('Case 1', 'Help us solve this problem', 10, ongId);
+    await createIncident('Case 2', 'Help us solve this problem', 20, ongId);
+    await createIncident('Case 3', 'Help us solve this problem', 30, ongId);
+
+    const response = await request(app).get('/incidents').query({ page: 1 });
+
+    expect(response.status).toBe(200);
+  });
+
+  it('should not be able to list incidents with an invalid page number', async () => {
+    const ongId = await createOng();
+
+    await createIncident('Case 1', 'Help us solve this problem', 10, ongId);
+    await createIncident('Case 2', 'Help us solve this problem', 20, ongId);
+    await createIncident('Case 3', 'Help us solve this problem', 30, ongId);
+
+    const response = await request(app)
+      .get('/incidents')
+      .query({ page: 'test' });
+
+    expect(response.status).toBe(400);
   });
 
   it('should be able to return empty list', async () => {

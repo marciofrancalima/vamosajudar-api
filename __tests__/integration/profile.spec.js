@@ -56,6 +56,36 @@ describe('PROFILE', () => {
     expect(response.body).toHaveLength(3);
   });
 
+  it('should be able to list all (3 cases) specific ong incidents with page number', async () => {
+    const ongId = await createOng();
+
+    await createIncident('Case 1', 'Help us solve this problem', 10, ongId);
+    await createIncident('Case 2', 'Help us solve this problem', 20, ongId);
+    await createIncident('Case 3', 'Help us solve this problem', 30, ongId);
+
+    const response = await request(app)
+      .get('/profile')
+      .query({ page: 1 })
+      .set('Authorization', ongId);
+
+    expect(response.body).toHaveLength(3);
+  });
+
+  it('should be able to list all (3 cases) specific ong incidents with invalid page number', async () => {
+    const ongId = await createOng();
+
+    await createIncident('Case 1', 'Help us solve this problem', 10, ongId);
+    await createIncident('Case 2', 'Help us solve this problem', 20, ongId);
+    await createIncident('Case 3', 'Help us solve this problem', 30, ongId);
+
+    const response = await request(app)
+      .get('/profile')
+      .query({ page: 'test' })
+      .set('Authorization', ongId);
+
+    expect(response.status).toBe(400);
+  });
+
   it('should be able to return empty list', async () => {
     const ongId = await createOng();
 
